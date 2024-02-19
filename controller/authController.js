@@ -6,7 +6,7 @@ const { generate: generateToken } = require('../utils/token');
 
 exports.login = function(req, res) {
     const { email, password } = req.body;
-    User.login(email, (err, data) => {
+    User.login(email.trim(), (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -22,7 +22,7 @@ exports.login = function(req, res) {
             return;
         }
         if (data) {
-            if (comparePassword(password, data.password)) {
+            if (comparePassword(password, data.user_password)) {
                 const token = generateToken(data.id);
                 res.status(200).send({
                     status: 'success',
@@ -62,5 +62,14 @@ exports.register = function(req, res) {
                 }
             });
         }
+    });
+};
+
+exports.home = function(req, res) {
+    const data = req.user;
+    console.log(req.user);
+    res.status(201).send({
+        status: "success",
+        data: data.id
     });
 };

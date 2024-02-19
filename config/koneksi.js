@@ -15,8 +15,10 @@ const conn = mysql.createConnection({
     password: DB_PASS,
     database: DB_NAME
 });
+
 conn.connect(function(err) {
     if (err) throw err;
     console.log("koneksi Berhasil!");
 });
+
 module.exports = conn;

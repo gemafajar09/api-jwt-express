@@ -1,17 +1,17 @@
-const express           = require('express')
-const bodyParser        = require('body-parser');
-const cors              = require("cors");
+const express = require('express')
+const bodyParser = require('body-parser');
+const cors = require("cors");
+const { logger } = require('./utils/logger');
 
 require('dotenv').config();
 
 const app = express()
-const port = process.env.PORT;
-const secret_key = process.env.SECRET_KEY;
+const PORT = process.env.PORT;
 
 var corsOptions = {
     origin: "http://localhost:3000"
 };
-  
+
 app.use(cors(corsOptions));
 
 // permintaan dari content-type - application/x-www-form-urlencoded
@@ -24,8 +24,8 @@ app.use(bodyParser.json())
 const routers = require('./router/router')
 
 // menggunakan middleware
-app.use('/api/', routers) 
+app.use('/api/', routers)
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+    logger.info(`Running on PORT ${PORT}`);
 })

@@ -4,19 +4,16 @@ const validatorHandler = require('../middleware/validatorhandler');
 
 const signup = (req, res, next) => {
     const schema = Joi.object().keys({
-        user_nama: Joi.string()
+        nama: Joi.string()
             .trim()
-            .alphanum()
-            .min(3)
-            .max(50)
             .required(),
 
-        user_email: Joi.string()
+        email: Joi.string()
             .trim()
             .email()
             .required(),
 
-        user_password: Joi.string()
+        password: Joi.string()
             .trim()
             .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
             .required()
@@ -26,11 +23,11 @@ const signup = (req, res, next) => {
 
 const signin = (req, res, next) => {
     const schema = Joi.object().keys({
-        user_email: Joi.string()
+        email: Joi.string()
             .trim()
             .email()
             .required(),
-        user_password: Joi.string()
+        password: Joi.string()
             .trim()
             .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
             .required()
