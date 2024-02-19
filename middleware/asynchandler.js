@@ -10,6 +10,4 @@ const asyncHandler = (cb) => async(req, res, next) => {
     return true;
 }
 
-module.exports = {
-    asyncHandler
-}
+module.exports = asyncHandler

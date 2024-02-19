@@ -1,8 +1,11 @@
 const router = require('express').Router();
-const { asyncHandler } = require('../middleware/asynchandler');
+const asyncHandler = require('../middleware/asynchandler');
 const authenticateJWT = require('../middleware/authMiddleware');
 const checkEmail = require('../middleware/checkemail');
-const { signup: signupValidator, signin: signinValidator } = require('../validator/validator');
+const {
+    signup: signupValidator,
+    signin: signinValidator
+} = require('../validator/validator');
 
 const authController = require('../controller/authController');
 

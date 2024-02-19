@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const secret_key = process.env.SECRET_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 
+var token
 const authenticateJWT = (req, res, next) => {
-    var token
-    const authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization
 
     if (authHeader) {
         token = authHeader.split(' ')[1];
@@ -15,14 +15,14 @@ const authenticateJWT = (req, res, next) => {
         return res.status(401).json({ message: "Token not found" });
     }
 
-    jwt.verify(token, secret_key, (err, user) => {
+    jwt.verify(token, SECRET_KEY, (err, user) => {
         if (err) {
-            return res.status(403).json({ message: "Invalid token" });
+            return res.status(403).json({ message: "Invalid token" })
         }
 
-        req.user = user;
-        next();
-    });
-};
+        req.user = user
+        next()
+    })
+}
 
 module.exports = authenticateJWT;

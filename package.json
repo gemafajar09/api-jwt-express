@@ -1,41 +1,38 @@
 {
-  "name": "service-jwt",
-  "version": "1.0.0",
-  "description": "latihan api jwt",
-  "main": "index.js",
-  "scripts": {
-    "test": "node index.js",
-    "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gemafajar09/api-jwt-express.git"
-  },
-  "keywords": [
-    "api-jwt-express"
-  ],
-  "author": "gemafajar09",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gemafajar09/api-jwt-express/issues"
-  },
-  "homepage": "https://github.com/gemafajar09/api-jwt-express#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.4",
-    "express": "^4.18.2",
-    "fs": "^0.0.1-security",
-    "joi": "^17.12.1",
-    "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
-    "nodemon": "^3.0.3",
-    "password-hash": "^1.2.2",
-    "path": "^0.12.7",
-    "sequelize": "^6.37.0",
-    "winston": "^3.11.0"
-  }
+    "name": "service-jwt",
+    "version": "1.0.0",
+    "description": "latihan api jwt",
+    "main": "index.js",
+    "scripts": {
+        "test": "node index.js",
+        "start": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gemafajar09/api-jwt-express.git"
+    },
+    "keywords": [
+        "api-jwt-express"
+    ],
+    "author": "gemafajar09",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/gemafajar09/api-jwt-express/issues"
+    },
+    "homepage": "https://github.com/gemafajar09/api-jwt-express#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.2",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.4",
+        "express": "^4.18.2",
+        "fs": "^0.0.1-security",
+        "joi": "^17.12.1",
+        "jsonwebtoken": "^9.0.2",
+        "mysql": "^2.18.1",
+        "nodemon": "^3.0.3",
+        "path": "^0.12.7",
+        "winston": "^3.11.0"
+    }
 }

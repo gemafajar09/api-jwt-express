@@ -67,9 +67,19 @@ exports.register = function(req, res) {
 
 exports.home = function(req, res) {
     const data = req.user;
-    console.log(req.user);
-    res.status(201).send({
-        status: "success",
-        data: data.id
-    });
+    User.home(data.id, (err, response) => {
+        if (err) {
+            res.status(500).send({
+                status: "error",
+                message: err.message
+            });
+        } else {
+            res.status(201).send({
+                status: "success",
+                data: {
+                    response
+                }
+            });
+        }
+    })
 };
