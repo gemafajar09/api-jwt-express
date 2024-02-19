@@ -1,16 +1,14 @@
-const express           = require('express')
-const jwt               = require('jsonwebtoken');
-const authenticateJWT   = require('../jwt/authMiddleware');
-const router = express.Router()
+const router = require('express').Router();
+const { asyncHandler } = require('../middleware/asynchandler');
+const checkEmail = require('../middleware/checkemail');
+const { signup: signupValidator, signin: signinValidator } = require('../validator/validator');
 
-const authController =   require('../controller/authController');
+const authController = require('../controller/authController');
 
-router.post('/login', authController.login);
-router.post('/register', authController.register);
+router.route('/register')
+    .post(signupValidator, asyncHandler(checkEmail), asyncHandler(authController.register));
 
-router.get('/protected', authenticateJWT, (req, res) => {
-    // If token is valid, return protected data
-    res.json({ message: 'This is a protected route', userId: req.userId });
-});
+router.route('/login')
+    .post(signinValidator, asyncHandler(authController.login));
 
 module.exports = router

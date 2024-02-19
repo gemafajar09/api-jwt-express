@@ -1,39 +1,48 @@
 'use strict';
-var conn = require('../config/koneksi');
-var passwordHash = require('password-hash');
+const conn = require('../config/koneksi');
+const { logger } = require('../utils/logger');
+const { registerUser: formRegister, loginUser: formLogin } = require('../config/query')
 
-var User = function(user){
-    this.user_nama     = user.user_nama;
-    this.user_email    = user.user_email;
-    this.user_password = user.user_password;
-};
+class User {
+    constructor(nama, email, password) {
+        this.nama = nama;
+        this.email = email;
+        this.password = password;
+    }
 
-User.login = function (user, result) {
-    conn.query("SELECT * FROM tb_user WHERE user_email = ?", [user.user_email], function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-        else{
-            console.log(res);
-            var pass = passwordHash.verify(user.user_password, res.user_password)
-            if(!pass) return
-            result(null, res.id);
-        }
-    });
-};
+    static register(newUser, cb) {
+        conn.query(formRegister, [
+            newUser.nama,
+            newUser.email,
+            newUser.password
+        ], (err, res) => {
+            if (err) {
+                logger.error(err.message);
+                cb(err, null);
+                return;
+            }
+            cb(null, {
+                id: res.insertId,
+                nama: newUser.nama,
+                email: newUser.email
+            });
+        });
+    }
 
-User.register = function (user, result) {
-    var pass = passwordHash.generate(user.user_password);
-    conn.query("INSERT INTO tb_user (user_nama,user_email,user_password) VALUES (?,?,?)", [user.user_nama, user.user_email, pass], function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-        else{
-            result(null, res.insertId);
-        }
-    });
-};
+    static login(email, cb) {
+        conn.query(formLogin, email, (err, res) => {
+            if (err) {
+                logger.error(err.message);
+                cb(err, null);
+                return;
+            }
+            if (res.length) {
+                cb(null, res[0]);
+                return;
+            }
+            cb({ kind: "not_found" }, null);
+        })
+    }
+}
 
-module.exports= User;
+module.exports = User;
