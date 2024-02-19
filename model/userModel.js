@@ -1,11 +1,11 @@
 'use strict';
-const conn = require('../config/koneksi');
+const conn = require('../database/koneksi');
 const { logger } = require('../utils/logger');
 const {
     registerUser: formRegister,
     loginUser: formLogin,
     getUser: getUser
-} = require('../config/query')
+} = require('../database/query')
 
 class User {
     constructor(nama, email, password) {
