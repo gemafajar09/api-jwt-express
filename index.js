@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const { logger } = require('./utils/logger');
+const io = require("./router/socket.io");
 
 require('dotenv').config();
 
@@ -25,6 +26,10 @@ const routers = require('./router/router')
 
 // menggunakan middleware
 app.use('/api/', routers)
+
+io.on("connection", (socket) => {
+    logger.info(`User connected : ${socket.id}`)
+})
 
 app.listen(PORT, () => {
     logger.info(`Running on PORT ${PORT}`);
